@@ -13,9 +13,8 @@ public class GunWorkings : MonoBehaviour
      *Teddy Fleitas 5/14/24
      ********************************/
 
-    public UnityEvent OnGunShoot;   //event to see when gun shoot
+    //public UnityEvent OnGunShoot;   //event to see when gun shoot
     public float FireCooldown;      //guns cooldown time
-    //public bool Automatic;          //decides if gun is auto or not
     private float CurrentCooldown;  //holds cooldown time between shots
     [SerializeField] private InputActionReference shootInput;  //gets shoot input
     [SerializeField] private GameObject projectile;  //projectile game object
@@ -29,15 +28,17 @@ public class GunWorkings : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
+        Debug.Log(shootInput.action.ReadValue<bool>());
+
             if (shootInput.action.ReadValue<bool>())    //gets headset input
             {
                 if (CurrentCooldown <= 0f)      //checks if cooldown time is over
                 {
-                    CurrentCooldown = FireCooldown;     //resets currentcooldown
                     Shoot();
-                }
+                   CurrentCooldown = FireCooldown;     //resets currentcooldown
             }
+        }
         CurrentCooldown -= Time.deltaTime;      //sets currentcooldown 
     }
 
